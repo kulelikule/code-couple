@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<kas-nav></kas-nav>
-		<div class="container">
+		<div class="container page-container">
 			<router-view></router-view>
 		</div>
 	</div>
@@ -15,3 +15,9 @@
 		}
 	}
 </script>
+
+<style>
+	.page-container{
+		padding: 100px;
+	}
+</style>

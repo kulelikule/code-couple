@@ -12,14 +12,21 @@
 			</div>
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-9">
 				<ul class="nav navbar-nav">
-					<li class="active">
-						<router-link to='/'>首页</router-link>
-					</li>
-					<li>
-						<router-link to='/child'>子页面</router-link>
+					<li v-for="item in items">
+						<router-link :to='item.url'>{{item.name}}</router-link>
 					</li>
 				</ul>
 			</div>
 		</div>
 	</nav>
 </template>
+
+<script>
+	export default {
+		data() {
+			return {
+				items: this.$store.state.navItems
+			}
+		}
+	}
+</script>

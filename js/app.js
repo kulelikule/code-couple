@@ -1,27 +1,16 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import App from './page/app.vue';
-import Home from './page/home.vue';
-import Child from './page/child.vue';
+//引入状态机
+import store from './store';
+//引入路由
+import router from './router';
 //引入样式
 import '../node_modules/bootstrap/dist/css/bootstrap.css'
-//启用路由
-Vue.use( VueRouter );
-
-const router = new VueRouter({
-	routes: [
-        {
-            path: '/',
-            component: Home
-        }, {
-            path: '/child',
-            component: Child
-        }
-    ]
-});
 
 new Vue({
 	el: '#app',
+    store,
 	router,
-	render: h=>h(App)
+	render: h => h(App)
 });
