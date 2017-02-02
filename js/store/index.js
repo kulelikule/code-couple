@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import navModule from './modules/nav';
 import childModule from './modules/child';
 import homeModule from './modules/home';
 
@@ -7,18 +8,8 @@ import homeModule from './modules/home';
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-	state: {
-		navItems: [{
-			name: '首页',
-			url: '/',
-			isActive: false
-		},{
-			name: '自页面',
-			url: '/child',
-			isActive: false
-		}]
-	},
 	modules: {
+		nav: navModule,
 		home: homeModule,
 		child: childModule
 	}

@@ -5,16 +5,17 @@ export default {
 	mutations: {
 		increment(state) {
 			state.count += 2;
+			console.log('home');
 		}
 	},
 	getters: {
-		doubleCount(state) {
+		doubleCountHome(state) {
 			return state.count * 2;
 		}
 	},
 	actions: {
-		incrementCount({state, rootState, commit}) {
-			commit('increment');
-		}
+		// incrementCount({state, rootState, commit}) {
+			// commit('increment');
+		// }
 	}
 }

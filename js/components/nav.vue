@@ -23,10 +23,6 @@
 
 <script>
 	export default {
-		data() {
-			return {
-				items: this.$store.state.navItems
-			}
-		}
+		props: ['items']
 	}
 </script>

@@ -4,11 +4,12 @@ export default {
 	},
 	mutations: {
 		increment(state) {
-			state.count++;
+			state.count += 3;
+			console.log('child');
 		}
 	},
 	getters: {
-		doubleCount(state) {
+		doubleCountChild(state) {
 			return state.count * 2;
 		}
 	},
