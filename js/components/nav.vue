@@ -12,7 +12,7 @@
 			</div>
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-9">
 				<ul class="nav navbar-nav">
-					<li v-for="item in items">
+					<li v-for="item in items" @click="swicthPage(item.id)" :class="{active: item.isActive}">
 						<router-link :to='item.url'>{{item.name}}</router-link>
 					</li>
 				</ul>
@@ -23,6 +23,16 @@
 
 <script>
 	export default {
-		props: ['items']
+		props: {
+			items: {
+				type: Array,
+				required: true
+			}
+		},
+		methods: {
+			swicthPage(id) {
+				this.$emit('swicthPage', {id});
+			}
+		}
 	}
 </script>
