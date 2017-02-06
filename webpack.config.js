@@ -32,10 +32,13 @@ var webpackConfig = {
             test : /\.css$/,
             loaders : ['style', 'css']
         }, {
+        	test : /\.less$/,
+            loaders : ['style', 'css', 'less']
+        }, {
 			test : /\.vue$/,
 			loader: 'vue'
 		}, {
-			test: /\.(eot|ttf|woff|woff2|svg)$/, 
+			test: /\.(eot|ttf|woff|woff2|svg|png|gif|jpg)$/, 
 			loader: "file-loader" 
 		}]
     },

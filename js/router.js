@@ -1,19 +1,24 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Home from './page/home.vue';
-import Child from './page/child.vue';
+import Blog from './page/blog.vue';
+import Life from './page/life.vue';
+import Product from './page/product.vue';
 
 //启用路由
 Vue.use( VueRouter );
 
 const router = new VueRouter({
+	linkActiveClass: 'active',
 	routes: [
         {
-            path: '/',
-            component: Home
+            path: '/blog',
+            component: Blog
         }, {
-            path: '/child',
-            component: Child
+            path: '/life',
+            component: Life
+        }, {
+            path: '/product',
+            component: Product
         }
     ]
 });

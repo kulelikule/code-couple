@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<p>这是子页面</p>
+		<p>这是生活</p>
 		<p>数字:{{ doubleCountHome }}</p>
 		<div @click="add">增加</div>
 	</div>
