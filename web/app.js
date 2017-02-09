@@ -1,3 +1,7 @@
+if(module.hot) {
+    module.hot.accept();
+}
+
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import App from './page/app.vue';
