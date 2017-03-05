@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import nav from './modules/nav';
-import blogList from './modules/blog_list'
+import blogDatas from './modules/blog'
 import childModule from './modules/child';
 import homeModule from './modules/home';
 
@@ -11,7 +11,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
 	modules: {
 		nav,
-		blogList,
+        blogDatas,
 		home: homeModule,
 		child: childModule
 	}

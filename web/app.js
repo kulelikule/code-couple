@@ -3,8 +3,7 @@ if(module.hot) {
 }
 
 import Vue from 'vue';
-import VueRouter from 'vue-router';
-import App from './page/app.vue';
+import App from './page/App.vue';
 //引入状态机
 import store from './store';
 //引入路由

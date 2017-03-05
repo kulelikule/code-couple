@@ -1,4 +1,4 @@
-import types from '../types';
+import types from '../mutation-types';
 import uuid from 'uuid';
 
 export default {

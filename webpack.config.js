@@ -1,6 +1,12 @@
 var path = require('path');
 var webpack = require('webpack');
+var autoprefixer = require('autoprefixer');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
+
+//打包样式
+var extractCSS = new ExtractTextPlugin('css/vendor.css');
+var extractLESS = new ExtractTextPlugin('css/style.css');
 
 //服务器中使用hmr
 var port = '8081'; 
@@ -10,6 +16,7 @@ var hotMiddlewareScript = 'webpack-hot-middleware/client?reload=true';
 var webpackConfig = {
 	port,
     entry : {
+	    vendor: ['vue', 'vuex', 'vue-router'],
         app : ['./web/app', hotMiddlewareScript]
     },
     output : {
@@ -19,6 +26,7 @@ var webpackConfig = {
     },
     //enable dev source map
     devtool : 'eval-source-map',
+    postcss: [ autoprefixer({ browsers: ['last 2 versions'] }) ],
     resolve : {
         extensions : ['', '.js', '.vue'],
         alias: {
@@ -32,10 +40,10 @@ var webpackConfig = {
             loaders : ['babel']
         }, {
             test : /\.css$/,
-            loaders : ['style', 'css']
+            loader : extractCSS.extract('style', 'css')
         }, {
         	test : /\.less$/,
-            loaders : ['style', 'css', 'less']
+            loader : extractLESS.extract('style', 'css!postcss!less')
         }, {
 			test : /\.vue$/,
 			loader: 'vue'
@@ -43,6 +51,11 @@ var webpackConfig = {
 			test: /\.(eot|ttf|woff|woff2|svg|png|gif|jpg)$/, 
 			loader: "file-loader" 
 		}]
+    },
+    vue: {
+        loaders: {
+            less: extractLESS.extract('style', 'css!postcss!less'),
+        }
     },
     plugins : [
     	//服务器中使用hmr所需要的插件
@@ -52,7 +65,14 @@ var webpackConfig = {
         //自动生成页面的插件
 	    new HtmlWebpackPlugin({
 	        template: './templates/app.html'
-	    })
+	    }),
+        //公用js单独打包
+        new webpack.optimize.CommonsChunkPlugin({
+            names: ['vendor']
+        }),
+        //样式打包
+        extractCSS,
+        extractLESS
 	]
 };
 
