@@ -23,7 +23,7 @@
 	}
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 	.article-list{
 		.list-title {
 			padding: 0 5px;

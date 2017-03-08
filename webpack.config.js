@@ -25,7 +25,7 @@ var webpackConfig = {
         publicPath
     },
     //enable dev source map
-    devtool : 'eval-source-map',
+    devtool : 'source-map',
     postcss: [ autoprefixer({ browsers: ['last 2 versions'] }) ],
     resolve : {
         extensions : ['', '.js', '.vue'],
@@ -40,10 +40,10 @@ var webpackConfig = {
             loaders : ['babel']
         }, {
             test : /\.css$/,
-            loader : extractCSS.extract('style', 'css')
+            loader : extractCSS.extract('style', 'css?sourceMap')
         }, {
         	test : /\.less$/,
-            loader : extractLESS.extract('style', 'css!postcss!less')
+            loader : extractLESS.extract('style', 'css?sourceMap!postcss?sourceMap!less?sourceMap')
         }, {
 			test : /\.vue$/,
 			loader: 'vue'
@@ -54,7 +54,7 @@ var webpackConfig = {
     },
     vue: {
         loaders: {
-            less: extractLESS.extract('style', 'css!postcss!less'),
+            less: extractLESS.extract('style', 'css?sourceMap!postcss?sourceMap!less?sourceMap'),
         }
     },
     plugins : [
