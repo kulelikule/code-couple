@@ -1,0 +1,16 @@
+import Vue from 'vue'
+import Vuex from 'vuex'
+import blog from './modules/blog'
+import life from './modules/life'
+import technology from './modules/technology'
+
+//启用Vuex
+Vue.use(Vuex);
+
+export default new Vuex.Store({
+    modules: {
+        blog,
+        life,
+        technology
+    }
+});

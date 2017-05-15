@@ -6,19 +6,19 @@ Vue.use(Router)
 export default new Router({
     routes: [{
         path: '/blog',
-        component: () => import('@/components/Blog'),
+        component: () => import('@/views/Blog'),
         children: [{
             path: '',
             name: 'BlogHome',
-            component: () => import('@/components/BlogHome')
+            component: () => import('@/views/BlogHome')
         },{
-            path: 'all-articles',
+            path: 'blog-articles',
             name: 'BlogArticles',
-            component: () => import('@/components/BlogArticles')
+            component: () => import('@/views/BlogArticles')
         },{
-            path: 'article-details',
+            path: 'article-details/:id',
             name: 'ArticleDetails',
-            component: () => import('@/components/ArticleDetails')
+            component: () => import('@/views/ArticleDetails')
         }]
     }]
 })

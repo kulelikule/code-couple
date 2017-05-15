@@ -2,22 +2,27 @@
     <div class="article-list">
         <div class="article-list-content">
             <ul>
-                <li class="clearfix">
-                    <router-link to="/blog/article-details" class="title fl">标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题</router-link>
-                    <span class="fr">2017-01-01</span>
-                </li>
-                <li class="clearfix mt15">
-                    <a class="title fl">标题标题标题标题标题标题标题标题</a>
-                    <span class="fr">2017-01-01</span>
-                </li>
-                <li class="clearfix mt15">
-                    <a class="title fl">标题标题标题标题标题标题标题标题</a>
-                    <span class="fr">2017-01-01</span>
+                <li class="clearfix" v-for="(item, i) in items" :key="item.id" :class="{mt15: i !== 0}">
+                    <router-link :to="'/blog/article-details/' + item.id" class="title fl">{{item.title}}</router-link>
+                    <span class="fr">{{item.time | dateFormat('yyyy-MM-dd')}}</span>
                 </li>
             </ul>
         </div>
     </div>
 </template>
+
+<script>
+    import filters from '@/filters'
+    export default {
+        filters,
+        props: {
+            items: {
+                type: Array,
+                default: () => []
+            }
+        }
+    }
+</script>
 
 <style scoped lang="less">
     .article-list-content{

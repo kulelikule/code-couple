@@ -1,11 +1,12 @@
 <template>
     <div class="blog-home">
+        <TopBar></TopBar>
         <Row class="mt10">
             <Col span="18">
                 <Card>
                     <h2 slot="title">最新文章</h2>
-                    <router-link slot="extra" to="/blog/all-articles" class="fr">查看所有文章</router-link>
-                    <ArticlesList></ArticlesList>
+                    <router-link slot="extra" to="/blog/blog-articles" class="fr">查看所有文章</router-link>
+                    <ArticlesList :items="newArticles"></ArticlesList>
                 </Card>
             </Col>
             <Col span="6">
@@ -18,14 +19,15 @@
 </template>
 
 <script>
+    import { mapState } from 'vuex'
     export default {
-        data () {
-            return {
-            }
-        },
+        computed: mapState({
+            newArticles: state => state.blog.newArticles
+        }),
         components: {
-            ArticlesList: () => import('./ArticlesList.vue'),
-            AboutMe: () => import('./AboutMe.vue')
+            TopBar: () => import('../components/TopBar.vue'),
+            ArticlesList: () => import('../components/ArticlesList.vue'),
+            AboutMe: () => import('../components/AboutMe.vue')
         }
     }
 </script>
