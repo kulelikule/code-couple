@@ -5,7 +5,7 @@
             <h2 slot="title">所有文章</h2>
             <ArticlesList :items="allArticles"></ArticlesList>
         </Card>
-        <Page total="100" page-size="1r0" show-elevator class="articles-pager fr mt15"></Page>
+        <Page :total="100" :page-size="10" show-elevator class="articles-pager fr mt15"></Page>
     </div>
 </template>
 

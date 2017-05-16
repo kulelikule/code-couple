@@ -1,19 +1,12 @@
 <template>
     <div id="app">
-        <main-nav></main-nav>
-        <div class="container">
-            <router-view></router-view>
-        </div>
+        <router-view></router-view>
     </div>
 </template>
 
 <script>
-    import MainNav from './components/MainNav.vue';
     export default {
-        name: 'app',
-        components: {
-            MainNav
-        }
+        name: 'app'
     }
 </script>
 
