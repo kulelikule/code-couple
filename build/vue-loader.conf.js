@@ -3,10 +3,14 @@ var config = require('../config')
 var isProduction = process.env.NODE_ENV === 'production'
 
 module.exports = {
-  loaders: utils.cssLoaders({
-    sourceMap: isProduction
-      ? config.build.productionSourceMap
-      : config.dev.cssSourceMap,
-    extract: isProduction
-  })
+    loaders: utils.cssLoaders({
+        sourceMap: isProduction
+            ? config.build.productionSourceMap
+            : config.dev.cssSourceMap,
+        extract: isProduction
+    }),
+    cssModules: {
+        localIdentName: '[name]-[local]-[hash:base64:5]',
+        camelCase: true
+    }
 }

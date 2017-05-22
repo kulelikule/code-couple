@@ -5,7 +5,7 @@
             <Col span="18">
                 <div class="article-area">
                     <h1 class="article-title">{{articleDetails.title}}</h1>
-                    <div class="article-content mt20" v-html="articleDetails.content"></div>
+                    <div class="mt20" :class="$style.articleContent" v-html="articleDetails.content"></div>
                 </div>
             </Col>
             <Col span="6">
@@ -44,7 +44,7 @@
     }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
     .right-bar{
         padding-left: 10px;
     }
@@ -55,6 +55,9 @@
         padding-bottom: 10px;
         border-bottom: 1px solid #e3e8ee;
     }
+</style>
+
+<style lang="less" module>
     .article-content{
         font-size: 16px;
         line-height: 2;

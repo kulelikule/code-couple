@@ -2,9 +2,9 @@
     <div class="login">
         <Card :bordered="false">
             <p slot="title">登录</p>
-            <p>卡片内容</p>
-            <p>卡片内容</p>
-            <p>卡片内容</p>
+            <div class="login-form">
+
+            </div>
         </Card>
     </div>
 </template>

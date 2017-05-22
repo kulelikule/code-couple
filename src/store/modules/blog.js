@@ -37,7 +37,7 @@ export default {
         articleDetails: {
             id: '1',
             title: '文章标题',
-            content: '<p>第一段</p><p>第二段<p/>'
+            content: '<p>第一段</p><p>第二段</p>'
         }
     }
 }
