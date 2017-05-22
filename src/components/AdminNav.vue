@@ -1,30 +1,50 @@
 <template>
-    <Menu class="nav" theme="dark" active-name="1">
-        <Menu-group title="内容管理">
-            <Menu-item name="1">
-                <Icon type="document-text"></Icon>
-                文章管理
-            </Menu-item>
-            <Menu-item name="2">
-                <Icon type="chatbubbles"></Icon>
-                评论管理
-            </Menu-item>
-        </Menu-group>
-        <Menu-group title="统计分析">
-            <Menu-item name="3">
-                <Icon type="heart"></Icon>
-                用户留存
-            </Menu-item>
-            <Menu-item name="4">
-                <Icon type="heart-broken"></Icon>
-                流失用户
-            </Menu-item>
-        </Menu-group>
+    <Menu theme="dark" class="nav fl">
+        <Input class="search-all" :class="$style.searchAll"></Input>
+        <Submenu name="1">
+            <template slot="title">
+                <Icon type="ios-paper"></Icon>
+                博客管理
+            </template>
+            <Menu-item name="1-1">发表博客</Menu-item>
+            <Menu-item name="1-2">博客列表</Menu-item>
+        </Submenu>
+        <Submenu name="2">
+            <template slot="title">
+                <Icon type="ios-people"></Icon>
+                生活经营
+            </template>
+            <Menu-item name="2-1">增添色彩</Menu-item>
+            <Menu-item name="2-2">锦上添花</Menu-item>
+        </Submenu>
+        <Submenu name="3">
+            <template slot="title">
+                <Icon type="stats-bars"></Icon>
+                技术探索
+            </template>
+            <Menu-item name="3-1">研究发表</Menu-item>
+        </Submenu>
     </Menu>
 </template>
 
-<style>
+<style scoped lang="less">
     .nav{
         height: 100%;
+    }
+    .search-all{
+        width: 90%;
+        height: 30px;
+        margin: 15px 5%;
+        border-radius: 3px;
+    }
+</style>
+
+<style module lang="less">
+    .search-all{
+        input[type=text]{
+            background: #5b6270;
+            border: none;
+            color: #bbb;
+        }
     }
 </style>
