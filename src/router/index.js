@@ -42,9 +42,9 @@ export default new Router({
                     component: () => import('@/views/admin/Index'),
                     children: [
                         {
-                            path: '',
-                            name: 'AdminBlogArticles',
-                            components: () => import('@/views/admin/BlogArticles')
+                            path: 'publish-blog',
+                            name: 'publishBlog',
+                            component: () => import('@/views/admin/publishBlog')
                         }
                     ]
                 }
