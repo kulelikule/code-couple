@@ -2,9 +2,9 @@
     <div class="article-list">
         <div class="article-list-content">
             <ul>
-                <li class="clearfix" v-for="(item, i) in items" :key="item.id" :class="{mt15: i !== 0}">
-                    <router-link :to="'/blog/article-details/' + item.id" class="title fl">{{item.title}}</router-link>
-                    <span class="fr">{{item.time | dateFormat('yyyy-MM-dd')}}</span>
+                <li class="clearfix" v-for="(item, i) in items" :key="item._id" :class="{mt15: i !== 0}">
+                    <router-link :to="'/blog/article-details/' + item._id" class="title fl">{{item.title}}</router-link>
+                    <span class="fr">{{item.date | dateFormat('yyyy-MM-dd')}}</span>
                 </li>
             </ul>
         </div>

@@ -28,6 +28,9 @@
             TopBar: () => import('../components/TopBar.vue'),
             ArticlesList: () => import('../components/ArticlesList.vue'),
             AboutMe: () => import('../components/AboutMe.vue')
+        },
+        created() {
+            this.$store.dispatch('getNewArticles')
         }
     }
 </script>

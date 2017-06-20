@@ -1,3 +1,4 @@
+import axios from 'axios'
 export default {
     state: {
         newArticles: [
@@ -38,6 +39,19 @@ export default {
             id: '1',
             title: '文章标题',
             content: '<p>第一段</p><p>第二段</p>'
+        }
+    },
+    mutations: {
+        getNewArticles(state, payload) {
+            state.newArticles = payload
+        }
+    },
+    actions: {
+        async getNewArticles({ commit }) {
+            let getArticlesRes = await axios.get('/ajax/blog/getNewArticles')
+            if(getArticlesRes.data.success === true){
+                commit('getNewArticles', getArticlesRes.data.result)
+            }
         }
     }
 }
