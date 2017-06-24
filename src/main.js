@@ -7,6 +7,7 @@ import store from './store'
 import iView from 'iview'
 import 'iview/dist/styles/iview.css'
 import './less/base.less'
+import './less/markdown-custom.less'
 
 //启用iview
 Vue.use(iView);

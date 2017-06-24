@@ -1,24 +1,32 @@
-<template>
-    <div class="article-details">
-        <TopBar :paths="paths"></TopBar>
-        <Row class="mt20">
-            <Col span="18">
+    <template>
+        <div class="article-details">
+            <TopBar :paths="paths"></TopBar>
+            <Row class="mt20">
+                <Col span="18">
                 <div class="article-area">
-                    <h1 class="article-title">{{articleDetails.title}}</h1>
-                    <div class="mt20" :class="$style.articleContent" v-html="articleDetails.content"></div>
+                    <div class="article-title">
+                        <span class="title">{{articleDetails.title}}</span>
+                        <div class="fr meta-info">
+                            <span>作者 : {{articleDetails.author}}</span>
+                            <span>时间 : {{articleDetails.date | dateFormat('yyyy-MM-dd')}}</span>
+                        </div>
+
+                    </div>
+                    <div class="mt20 markdown-display-area" :class="$style.articleContent" v-html="articleDetails.content"></div>
                 </div>
-            </Col>
-            <Col span="6">
+                </Col>
+                <Col span="6">
                 <div class="right-bar">
                     <AboutMe></AboutMe>
                 </div>
-            </Col>
-        </Row>
-    </div>
-</template>
+                </Col>
+            </Row>
+        </div>
+    </template>
 
 <script>
     import { mapState } from 'vuex'
+    import filters from '@/filters'
     export default {
         data() {
             return {
@@ -40,6 +48,15 @@
             TopBar: () => import('../components/TopBar.vue'),
             BreadcrumbNav: () => import('../components/BreadcrumbNav.vue'),
             AboutMe: () => import('../components/AboutMe.vue')
+        },
+        filters,
+        activated() {
+            this.$store.dispatch('getArticleDetails', {
+                id: this.$route.params.id
+            })
+        },
+        deactivated() {
+            this.$store.commit('clearAricleDetails')
         }
     }
 </script>
@@ -54,6 +71,17 @@
     .article-title{
         padding-bottom: 10px;
         border-bottom: 1px solid #e3e8ee;
+        .title{
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .meta-info{
+            font-size: 14px;
+            margin-top: 10px;
+            span:first-child{
+                margin-right: 20px;
+            }
+        }
     }
 </style>
 

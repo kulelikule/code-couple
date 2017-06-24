@@ -4,7 +4,7 @@
             <ul>
                 <li class="clearfix" v-for="(item, i) in items" :key="item._id" :class="{mt15: i !== 0}">
                     <router-link :to="'/blog/article-details/' + item._id" class="title fl">{{item.title}}</router-link>
-                    <span class="fr">{{item.date | dateFormat('yyyy-MM-dd')}}</span>
+                    <span class="fr date">{{item.date | dateFormat('yyyy-MM-dd')}}</span>
                 </li>
             </ul>
         </div>
@@ -36,5 +36,8 @@
         overflow: hidden;
         text-overflow: ellipsis;
         width: ~'calc(100% - 100px)';
+    }
+    .date{
+        color: #80848f;
     }
 </style>

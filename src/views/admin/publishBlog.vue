@@ -7,12 +7,12 @@
             <Input v-model="formItem.author" placeholder="请输入作者"></Input>
         </Form-item>
         <Form-item label="日期控件" class="time">
-            <Date-picker v-model="formItem.date" type="datetime" placeholder="选择日期和时间"></Date-picker>
+            <Date-picker v-model="formItem.date" type="datetime" placeholder="选择日期和时间(不填写即为提交时间)"></Date-picker>
         </Form-item>
         <Form-item label="内容" prop="content">
             <div class="content-editor">
                 <textarea :value="rawContent" @input="update" class="markdown-area fl"></textarea>
-                <div class="content-area fl" v-html="compiledMarkdown"></div>
+                <div class="content-area fl markdown-display-area" v-html="compiledMarkdown"></div>
             </div>
 
         </Form-item>
@@ -55,7 +55,9 @@
         },
         computed: {
             compiledMarkdown() {
-                this.formItem.content = marked(this.rawContent, { sanitize: true });
+                this.formItem.content = marked(this.rawContent, {
+                    //sanitize: true
+                });
                 return this.formItem.content;
             }
         },
@@ -64,6 +66,9 @@
                 this.rawContent = e.target.value
             }, 300),
             submitArticle() {
+                if(this.formItem.date === ''){
+                    this.formItem.date = new Date();
+                }
                 this.$refs.formValidate.validate((valid) => {
                     if (valid) {
                         this.$Loading.start();
@@ -72,7 +77,7 @@
                             this.$Message.info(response.data.message);
                         }.bind(this)).catch(function (response) {
                             this.$Loading.error();
-                            console.log(response);
+                            this.$Message.info(response.data.message);
                         }.bind(this));
                     } else {
                         this.$Message.error('表单验证失败!');
@@ -98,7 +103,7 @@
     .content-area{
         border-width: 1px 1px 1px 0;
         border-style: solid;
-
+        overflow: auto;
     }
     .time{
         width: 600px;
