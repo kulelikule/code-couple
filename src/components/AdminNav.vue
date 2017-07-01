@@ -1,12 +1,12 @@
 <template>
-    <Menu theme="dark" class="nav fl">
+    <Menu theme="dark" class="nav fl" :active-name="baseUrl" @on-select="switchPage">
         <Input class="search-all" :class="$style.searchAll"></Input>
         <Submenu name="1">
             <template slot="title">
                 <Icon type="ios-paper"></Icon>
                 博客管理
             </template>
-            <Menu-item name="1-1">发表博客</Menu-item>
+            <Menu-item name="/admin/index/publish-blog">发表博客</Menu-item>
             <Menu-item name="1-2">博客列表</Menu-item>
         </Submenu>
         <Submenu name="2">
@@ -26,6 +26,21 @@
         </Submenu>
     </Menu>
 </template>
+
+<script>
+    export default {
+        data() {
+            return {
+                baseUrl: this.$route.matched[this.$route.matched.length - 1].path
+            }
+        },
+        methods: {
+            switchPage(name){
+                this.$router.push(name);
+            }
+        }
+    }
+</script>
 
 <style scoped lang="less">
     .nav{

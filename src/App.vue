@@ -5,8 +5,23 @@
 </template>
 
 <script>
+    import axios from 'axios'
     export default {
-        name: 'app'
+        name: 'app',
+        created() {
+            axios.interceptors.response.use(response => {
+                if(response.data.success === true){
+                    return response.data;
+                }else{
+                    if(response.data.result === 403) {
+                        this.$router.push({name: 'Login'})
+                    }
+                    return Promise.reject(response.data);
+                }
+            }, error => {
+                return Promise.reject(error);
+            });
+        }
     }
 </script>
 

@@ -38,9 +38,7 @@ export default {
     actions: {
         async getNewArticles({ commit }) {
             let articlesRes = await axios.get('/ajax/blog/getNewArticles')
-            if(articlesRes.data.success === true){
-                commit('getNewArticles', articlesRes.data.result)
-            }
+            commit('getNewArticles', articlesRes.result)
         },
         async getArticleDetails({ commit } , payload) {
             let articleDetailsRes = await axios.get('/ajax/blog/getArticleDetails', {
@@ -48,9 +46,7 @@ export default {
                     id: payload.id
                 }
             })
-            if(articleDetailsRes.data.success === true){
-                commit('getArticleDetails', articleDetailsRes.data.result)
-            }
+            commit('getArticleDetails', articleDetailsRes.result)
         }
     }
 }

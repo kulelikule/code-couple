@@ -24,7 +24,7 @@
         data() {
             let url = this.$route.matched[0];
             return {
-                baseUrl: url ? url.path : '/blog/index'
+                baseUrl: url && url.path !== '' ? url.path : '/blog'
             }
         },
         methods: {

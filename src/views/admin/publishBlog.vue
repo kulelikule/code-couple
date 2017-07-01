@@ -65,20 +65,21 @@
             update: _.debounce(function (e) {
                 this.rawContent = e.target.value
             }, 300),
-            submitArticle() {
+            async submitArticle() {
                 if(this.formItem.date === ''){
                     this.formItem.date = new Date();
                 }
-                this.$refs.formValidate.validate((valid) => {
+                this.$refs.formValidate.validate(async valid => {
                     if (valid) {
                         this.$Loading.start();
-                        axios.post('/ajax/blogAdmin/save', this.formItem).then(function (response) {
+                        try{
+                            let saveBlogRes = await axios.post('/ajax/admin/blog/save', this.formItem)
                             this.$Loading.finish();
-                            this.$Message.info(response.data.message);
-                        }.bind(this)).catch(function (response) {
+                            this.$Message.info(saveBlogRes.message);
+                        }catch(err){
                             this.$Loading.error();
-                            this.$Message.info(response.data.message);
-                        }.bind(this));
+                            this.$Message.info(err.message);
+                        }
                     } else {
                         this.$Message.error('表单验证失败!');
                     }

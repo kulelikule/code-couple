@@ -2,24 +2,59 @@
     <div class="login">
         <Card :bordered="false" class="login-card" shadow>
             <p slot="title">登录</p>
-            <Form>
-                <Form-item prop="user">
-                    <Input type="text" placeholder="Username">
-                    <Icon type="ios-person-outline" slot="prepend"></Icon>
+            <Form ref="loginForm" :model="loginForm" :rules="ruleLogin">
+                <Form-item prop="username">
+                    <Input type="text" placeholder="Username" v-model="loginForm.username">
+                        <Icon type="ios-person-outline" slot="prepend"></Icon>
                     </Input>
                 </Form-item>
                 <Form-item prop="password">
-                    <Input type="password" placeholder="Password">
-                    <Icon type="ios-locked-outline" slot="prepend"></Icon>
+                    <Input type="password" placeholder="Password" v-model="loginForm.password">
+                        <Icon type="ios-locked-outline" slot="prepend"></Icon>
                     </Input>
                 </Form-item>
                 <Form-item>
-                    <Button type="primary" class="fr">登录</Button>
+                    <Button type="primary" class="fr" @click="handleSubmit">登录</Button>
                 </Form-item>
             </Form>
         </Card>
     </div>
 </template>
+
+<script>
+    import { mapState } from 'vuex'
+    export default {
+        data() {
+            return {
+                ruleLogin: {
+                    username: [
+                        { required: true, message: '请填写用户名', trigger: 'blur' }
+                    ],
+                    password: [
+                        { required: true, message: '请填写密码', trigger: 'blur' },
+                        { type: 'string', min: 6, message: '密码长度不能小于6位', trigger: 'blur' }
+                    ]
+                }
+            }
+        },
+        computed: {
+            ...mapState({
+                loginForm: state => state.login.loginForm
+            })
+        },
+        methods: {
+            handleSubmit() {
+                this.$refs.loginForm.validate((valid) => {
+                    if (valid) {
+                        this.$Message.success('提交成功!');
+                    } else {
+                        this.$Message.error('表单验证失败!');
+                    }
+                })
+            }
+        }
+    }
+</script>
 
 <style scoped>
     .login{
