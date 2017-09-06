@@ -19,7 +19,7 @@
 </template>
 
 <script>
-    import { mapState } from 'vuex'
+    import { mapState, mapActions } from 'vuex'
     export default {
         computed: mapState({
             newArticles: state => state.blog.newArticles
@@ -30,7 +30,13 @@
             AboutMe: () => import('../components/AboutMe.vue')
         },
         created() {
-            this.$store.dispatch('getNewArticles')
+            this.getNewArticles({
+                pageNo: 1,
+                limit: 10
+            })
+        },
+        methods: {
+            ...mapActions(['getNewArticles'])
         }
     }
 </script>

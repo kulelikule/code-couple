@@ -26,7 +26,7 @@
 
 <script>
     import { mapState } from 'vuex'
-    import filters from '@/filters'
+    import { dateFormat } from '@/utils'
     export default {
         data() {
             return {
@@ -49,7 +49,9 @@
             BreadcrumbNav: () => import('../components/BreadcrumbNav.vue'),
             AboutMe: () => import('../components/AboutMe.vue')
         },
-        filters,
+        filters: {
+            dateFormat
+        },
         activated() {
             this.$store.dispatch('getArticleDetails', {
                 id: this.$route.params.id

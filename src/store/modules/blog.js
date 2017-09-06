@@ -2,32 +2,21 @@ import axios from 'axios'
 export default {
     state: {
         newArticles: [],
-        allArticles: [
-            {
-                id: 1,
-                title: '文章1',
-                time: 1494827257746
-            },{
-                id: 2,
-                title: '文章2',
-                time: 1494827257746
-            },{
-                id: 3,
-                title: '文章3',
-                time: 1494827257746
-            },{
-                id: 4,
-                title: '文章4',
-                time: 1494827257746
-            }
-        ],
-        articleDetails: {}
+        allArticles: [],
+        articleDetails: {},
+        artcileCount: 0
     },
     mutations: {
-        getNewArticles(state, payload) {
+        setNewArticles(state, payload) {
             state.newArticles = payload
         },
-        getArticleDetails(state, payload) {
+        setAllArticles(state, payload) {
+            state.allArticles = payload
+        },
+        setArtcileCount(state, payload) {
+            state.artcileCount = payload
+        },
+        setArticleDetails(state, payload) {
             state.articleDetails = payload
         },
         clearAricleDetails(state) {
@@ -36,9 +25,19 @@ export default {
     }
     ,
     actions: {
-        async getNewArticles({ commit }) {
-            let articlesRes = await axios.get('/ajax/blog/getNewArticles')
-            commit('getNewArticles', articlesRes.result)
+        getArticles({}, payload) {
+            return axios.get('/ajax/blog/getArticles', {
+                params: payload
+            })
+        },
+        async getNewArticles({ commit, dispatch }, payload) {
+            let articlesRes = await dispatch('getArticles', payload)
+            commit('setNewArticles', articlesRes.result.data)
+        },
+        async getAllArticles({ commit, dispatch }, payload) {
+            let articlesRes = await dispatch('getArticles', payload)
+            commit('setAllArticles', articlesRes.result.data)
+            commit('setArtcileCount', articlesRes.result.count)
         },
         async getArticleDetails({ commit } , payload) {
             let articleDetailsRes = await axios.get('/ajax/blog/getArticleDetails', {
@@ -46,7 +45,7 @@ export default {
                     id: payload.id
                 }
             })
-            commit('getArticleDetails', articleDetailsRes.result)
+            commit('setArticleDetails', articleDetailsRes.result)
         }
     }
 }

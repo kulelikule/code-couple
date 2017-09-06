@@ -12,9 +12,11 @@
 </template>
 
 <script>
-    import filters from '@/filters'
+    import { dateFormat } from '@/utils'
     export default {
-        filters,
+        filters: {
+            dateFormat
+        },
         props: {
             items: {
                 type: Array,
