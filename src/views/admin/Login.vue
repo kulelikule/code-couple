@@ -22,10 +22,15 @@
 </template>
 
 <script>
-    import { mapState } from 'vuex'
+    import { mapActions } from 'vuex'
+    import { LOGIN } from '@/store/namespace'
     export default {
         data() {
             return {
+                loginForm: {
+                    username: '',
+                    password: ''
+                },
                 ruleLogin: {
                     username: [
                         { required: true, message: '请填写用户名', trigger: 'blur' }
@@ -37,16 +42,14 @@
                 }
             }
         },
-        computed: {
-            ...mapState({
-                loginForm: state => state.login.loginForm
-            })
-        },
         methods: {
+            ...mapActions(LOGIN, ['submitUserInfo']),
             handleSubmit() {
                 this.$refs.loginForm.validate((valid) => {
                     if (valid) {
-                        this.$Message.success('提交成功!');
+                        this.submitUserInfo(this.loginForm).then(() => {
+                            this.$router.push('/admin/index')
+                        })
                     } else {
                         this.$Message.error('表单验证失败!');
                     }

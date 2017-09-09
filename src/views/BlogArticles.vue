@@ -5,12 +5,13 @@
             <h2 slot="title">所有文章</h2>
             <ArticlesList :items="allArticles"></ArticlesList>
         </Card>
-        <Page :total="artcileCount" :page-size="limit" show-elevator class="articles-pager fr mt15" @on-change="switchPage"></Page>
+        <Page :total="articleCount" :page-size="limit" show-elevator class="articles-pager fr mt15" @on-change="switchPage"></Page>
     </div>
 </template>
 
 <script>
     import { mapState, mapActions } from 'vuex'
+    import { BLOG } from '../store/namespace'
     export default {
         data() {
             return {
@@ -24,10 +25,7 @@
             }
         },
         computed: {
-            ...mapState({
-                allArticles: state => state.blog.allArticles,
-                artcileCount: state => state.blog.artcileCount
-            }),
+            ...mapState(BLOG, ['allArticles', 'articleCount']),
         },
         components: {
             TopBar: () => import('../components/TopBar.vue'),
@@ -37,7 +35,7 @@
             this.switchPage(1)
         },
         methods: {
-            ...mapActions(['getAllArticles']),
+            ...mapActions(BLOG, ['getAllArticles']),
             switchPage(pageNo) {
                 this.getAllArticles({
                     pageNo,

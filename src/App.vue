@@ -16,9 +16,11 @@
                     if(response.data.result === 403) {
                         this.$router.push({name: 'Login'})
                     }
+                    this.$Message.warning(response.data.message)
                     return Promise.reject(response.data);
                 }
             }, error => {
+                this.$Message.error(error)
                 return Promise.reject(error);
             });
         }

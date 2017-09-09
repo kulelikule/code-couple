@@ -1,21 +1,9 @@
 import axios from 'axios'
 export default {
-    state: {
-        loginForm: {
-            username: '',
-            password: ''
-        }
-    },
-    mutations: {
-        clearPassword(state) {
-            state.loginForm.password = '';
-        }
-    },
+    namespaced: true,
     actions: {
-        submitUserInfo({ commit }) {
-            axios.post('', this.loginForm).then((res) => {
-                console.log(res)
-            })
+        submitUserInfo({}, payload) {
+            return axios.post('/ajax/login', payload)
         }
     }
 }

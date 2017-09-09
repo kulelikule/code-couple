@@ -1,10 +1,11 @@
 import axios from 'axios'
 export default {
+    namespaced: true,
     state: {
         newArticles: [],
         allArticles: [],
         articleDetails: {},
-        artcileCount: 0
+        articleCount: 0
     },
     mutations: {
         setNewArticles(state, payload) {
@@ -14,7 +15,7 @@ export default {
             state.allArticles = payload
         },
         setArtcileCount(state, payload) {
-            state.artcileCount = payload
+            state.articleCount = payload
         },
         setArticleDetails(state, payload) {
             state.articleDetails = payload

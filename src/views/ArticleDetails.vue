@@ -25,7 +25,8 @@
     </template>
 
 <script>
-    import { mapState } from 'vuex'
+    import { mapState, mapMutations, mapActions } from 'vuex'
+    import { BLOG } from '../store/namespace'
     import { dateFormat } from '@/utils'
     export default {
         data() {
@@ -41,9 +42,7 @@
                 }]
             }
         },
-        computed: mapState({
-            articleDetails: state => state.blog.articleDetails
-        }),
+        computed: mapState(BLOG, ['articleDetails']),
         components: {
             TopBar: () => import('../components/TopBar.vue'),
             BreadcrumbNav: () => import('../components/BreadcrumbNav.vue'),
@@ -53,12 +52,16 @@
             dateFormat
         },
         activated() {
-            this.$store.dispatch('getArticleDetails', {
+            this.getArticleDetails({
                 id: this.$route.params.id
             })
         },
         deactivated() {
-            this.$store.commit('clearAricleDetails')
+            this.clearAricleDetails()
+        },
+        methods: {
+            ...mapMutations(BLOG, ['clearAricleDetails']),
+            ...mapActions(BLOG, ['getArticleDetails'])
         }
     }
 </script>

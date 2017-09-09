@@ -20,10 +20,9 @@
 
 <script>
     import { mapState, mapActions } from 'vuex'
+    import { BLOG } from '../store/namespace'
     export default {
-        computed: mapState({
-            newArticles: state => state.blog.newArticles
-        }),
+        computed: mapState(BLOG, ['newArticles']),
         components: {
             TopBar: () => import('../components/TopBar.vue'),
             ArticlesList: () => import('../components/ArticlesList.vue'),
@@ -36,7 +35,7 @@
             })
         },
         methods: {
-            ...mapActions(['getNewArticles'])
+            ...mapActions(BLOG, ['getNewArticles'])
         }
     }
 </script>
